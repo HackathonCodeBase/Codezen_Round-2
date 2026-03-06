@@ -6,12 +6,6 @@ const DRAW = {
     transition: { duration: 1.2, ease: "easeInOut" },
 };
 
-const defaultProps = {
-    size: 20,
-    color: "currentColor",
-    strokeWidth: 1.5,
-};
-
 // ── Pulse / EKG ─────────────────────────────────────────────
 export function PulseIcon({ size = 20, color = "currentColor", strokeWidth = 1.5 }) {
     return (

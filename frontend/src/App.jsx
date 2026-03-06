@@ -11,17 +11,17 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSubmit = async (patientData) => {
+  const handleSubmit = async (data) => {
     setLoading(true);
     setError(null);
     setResult(null);
     try {
-      const data = await analyzePatient(patientData);
-      setResult(data);
+      const res = await analyzePatient(data);
+      setResult(res);
     } catch (err) {
       setError(
         err?.response?.data?.detail ||
-        "Unable to connect to backend. Ensure FastAPI is running on http://localhost:8000"
+        "Cannot connect to backend. Ensure FastAPI is running on http://localhost:8000"
       );
     } finally {
       setLoading(false);
@@ -29,89 +29,48 @@ function App() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0B0B0B" }}>
+    <div style={{ minHeight: "100vh", background: "#FAFAFA" }}>
 
-      {/* ── HEADER ── */}
       <Header />
 
-      {/* ── WORKSPACE TITLE BAR ── */}
-      <div
-        style={{
-          borderBottom: "1px solid #1F1F1F",
-          background: "#0E0E0E",
-        }}
-      >
-        <div
-          className="max-w-7xl mx-auto px-6"
-          style={{ padding: "1.5rem 1.5rem" }}
-        >
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
-            <div>
-              <motion.h1
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{
-                  fontSize: "1.4rem",
-                  fontWeight: 700,
-                  color: "#F5F5F5",
-                  letterSpacing: "-0.03em",
-                  marginBottom: "0.3rem",
-                }}
-              >
-                Patient Risk Analysis
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                style={{ fontSize: "0.78rem", color: "#5A5A5A" }}
-              >
-                17-rule clinical engine · Predictive risk scoring · Explainable alerts
-              </motion.p>
-            </div>
-
-            {/* Rule tags */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}
+      {/* Title bar */}
+      <div style={{ borderBottom: "1px solid #E5E7EB", background: "#fff" }}>
+        <div style={{ maxWidth: "86rem", margin: "0 auto", padding: "1.25rem 1.5rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem" }}>
+          <div>
+            <motion.h1
+              initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              style={{ fontSize: "1.3rem", fontWeight: 700, color: "#111111", letterSpacing: "-0.025em", marginBottom: "0.2rem" }}
             >
-              {[
-                "Glucose & Metabolic",
-                "Vital Signs",
-                "Drug Interactions",
-                "Allergy Conflicts",
-                "Risk Scoring",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  style={{
-                    fontSize: "0.65rem",
-                    fontWeight: 500,
-                    letterSpacing: "0.04em",
-                    padding: "0.2rem 0.65rem",
-                    border: "1px solid #2A2A2A",
-                    borderRadius: 3,
-                    color: "#5A5A5A",
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
+              Patient Risk Analysis
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              style={{ fontSize: "0.77rem", color: "#9CA3AF" }}
+            >
+              21 clinical rules · Predictive scoring · Expandable recommendations
+            </motion.p>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}
+          >
+            {["Vital Signs", "Glucose & Metabolic", "Drug Interactions", "Allergy Conflicts", "Risk Scoring"].map((t) => (
+              <span key={t} style={{ fontSize: "0.65rem", fontWeight: 500, padding: "0.2rem 0.6rem", border: "1px solid #E5E7EB", borderRadius: 4, color: "#6B7280", background: "#fff" }}>
+                {t}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </div>
 
-      {/* ── MAIN CONTENT ── */}
-      <main
-        className="max-w-7xl mx-auto"
-        style={{ padding: "1.5rem" }}
-      >
+      {/* Main */}
+      <main style={{ maxWidth: "86rem", margin: "0 auto", padding: "1.5rem" }}>
 
-        {/* Risk summary — appears after analysis */}
+        {/* Risk card — slides in after first result */}
         <AnimatePresence>
           {result && (
             <motion.div
@@ -119,54 +78,26 @@ function App() {
               initial={{ opacity: 0, height: 0, marginBottom: 0 }}
               animate={{ opacity: 1, height: "auto", marginBottom: "1.25rem" }}
               exit={{ opacity: 0, height: 0, marginBottom: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.35 }}
               style={{ overflow: "hidden" }}
             >
-              <RiskSummary
-                riskScore={result.risk_score}
-                riskLevel={result.risk_level}
-              />
+              <RiskSummary riskScore={result.risk_score} riskLevel={result.risk_level} />
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Two-column dashboard */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "1.25rem",
-            alignItems: "start",
-          }}
-          className="max-[900px]:grid-cols-1"
-        >
+        {/* Two-column layout */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem", alignItems: "start" }}>
           <PatientForm onSubmit={handleSubmit} loading={loading} />
           <AlertPanel result={result} error={error} />
         </div>
 
-        {/* ── Status bar ── */}
-        <div
-          style={{
-            marginTop: "1.25rem",
-            padding: "0.7rem 1.25rem",
-            background: "#0E0E0E",
-            border: "1px solid #1F1F1F",
-            borderRadius: 6,
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            gap: "1.5rem",
-          }}
-        >
-          {[
-            ["17 clinical rules active", "#3A3A3A"],
-            ["Real-time FastAPI analysis", "#3A3A3A"],
-            ["Local processing — no data stored", "#3A3A3A"],
-            ["Explainable alerts with recommendations", "#3A3A3A"],
-          ].map(([text, color]) => (
-            <div key={text} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#2A2A2A", flexShrink: 0 }} />
-              <span style={{ fontSize: "0.68rem", color }}>{text}</span>
+        {/* Status strip */}
+        <div style={{ marginTop: "1.25rem", padding: "0.65rem 1.25rem", background: "#fff", border: "1px solid #E5E7EB", borderRadius: 8, display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
+          {["21 clinical rules active", "Real-time FastAPI analysis", "Local — no data stored", "Expandable alert recommendations"].map((t) => (
+            <div key={t} style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
+              <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#E5E7EB" }} />
+              <span style={{ fontSize: "0.68rem", color: "#9CA3AF" }}>{t}</span>
             </div>
           ))}
         </div>

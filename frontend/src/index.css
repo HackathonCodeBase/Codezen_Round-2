@@ -3,40 +3,40 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────
-   THEME — Minimal Clinical Palette
+   THEME — Light Clinical
    ───────────────────────────────────────── */
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
 
-  /* Backgrounds */
-  --color-medical-black: #0B0B0B;
-  --color-charcoal: #161616;
-  --color-charcoal-2: #1C1C1C;
-  --color-charcoal-3: #222222;
+  /* Surfaces */
+  --color-bg: #FAFAFA;
+  --color-surface: #FFFFFF;
 
   /* Borders */
-  --color-border: #2A2A2A;
-  --color-border-subtle: #1F1F1F;
+  --color-border: #E5E7EB;
+  --color-border-2: #D1D5DB;
 
   /* Text */
-  --color-text-primary: #F5F5F5;
-  --color-text-secondary: #9A9A9A;
-  --color-text-muted: #5A5A5A;
+  --color-text-primary: #111111;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
 
-  /* Accent — Warm Brown / Sand */
-  --color-clinical-brown: #8B5E3C;
-  --color-soft-sand: #C8A27A;
-  --color-sand-light: #E8D5B7;
+  /* Accent */
+  --color-brown: #8B5E3C;
+  --color-brown-dk: #7A5235;
+  --color-sand: #C8A27A;
+  --color-sand-bg: #FFFBF5;
 
   /* Semantic */
-  --color-critical: #C84444;
-  --color-critical-bg: #1A0A0A;
-  --color-warning-bg: #1A1208;
-  --color-safe: #4A7C59;
-  --color-safe-bg: #0A1510;
-  --color-low-bg: #0E0E12;
-
-  --animate-slide-in: slideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  --color-red: #DC2626;
+  --color-red-bg: #FEF2F2;
+  --color-red-bd: #FECACA;
+  --color-amber: #92400E;
+  --color-amber-bg: #FFFBEB;
+  --color-amber-bd: #FDE68A;
+  --color-green: #065F46;
+  --color-green-bg: #F0FDF4;
+  --color-green-bd: #A7F3D0;
 }
 
 /* ─────────────────────────────────────────
@@ -54,120 +54,141 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-medical-black);
+  background: var(--color-bg);
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   letter-spacing: -0.01em;
 }
 
 /* ─────────────────────────────────────────
-   COMPONENT UTILITIES
+   COMPONENTS
    ───────────────────────────────────────── */
 @layer components {
 
-  /* Surface card */
-  .surface {
-    background: var(--color-charcoal);
+  .card {
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   }
 
-  /* Clinical input */
-  .clinical-input {
+  .field-input {
     width: 100%;
-    background: var(--color-medical-black);
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: 6px;
     color: var(--color-text-primary);
     font-family: inherit;
     font-size: 0.875rem;
-    padding: 0.6rem 0.85rem;
+    padding: 0.55rem 0.8rem;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.18s, box-shadow 0.18s;
   }
 
-  .clinical-input::placeholder {
+  .field-input::placeholder {
     color: var(--color-text-muted);
-    font-size: 0.82rem;
   }
 
-  .clinical-input:focus {
-    border-color: var(--color-clinical-brown);
-    box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.12);
+  .field-input:focus {
+    border-color: var(--color-brown);
+    box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.1);
   }
 
-  /* Primary button */
-  .btn-clinical {
+  .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    background: var(--color-clinical-brown);
+    gap: 0.4rem;
+    background: var(--color-brown);
     color: #fff;
     border: none;
     border-radius: 6px;
-    padding: 0.65rem 1.5rem;
+    padding: 0.6rem 1.4rem;
     font-family: inherit;
-    font-size: 0.87rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    letter-spacing: 0.01em;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.18s;
   }
 
-  .btn-clinical:hover:not(:disabled) {
-    background: #7A5235;
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-brown-dk);
   }
 
-  .btn-clinical:disabled {
-    opacity: 0.45;
+  .btn-primary:disabled {
+    opacity: 0.4;
     cursor: not-allowed;
   }
 
-  /* Section label */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.55rem 1rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.18s, color 0.18s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-border-2);
+    color: var(--color-text-primary);
+  }
+
+  .field-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.4rem;
+  }
+
   .section-label {
     font-size: 0.68rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-text-muted);
   }
 
-  /* Divider */
-  .divider {
-    height: 1px;
-    background: var(--color-border-subtle);
+  .dot-live {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 0 2px #D1FAE5;
+    animation: livePulse 2.5s ease infinite;
   }
 
-  /* Alert slide */
-  .alert-slide {
-    animation: var(--animate-slide-in);
+  .spinner {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
   }
 }
 
 /* ─────────────────────────────────────────
    KEYFRAMES
    ───────────────────────────────────────── */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes spinMe {
+@keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes statusPulse {
+@keyframes livePulse {
 
   0%,
   100% {
@@ -175,26 +196,6 @@ body {
   }
 
   50% {
-    opacity: 0.4;
+    opacity: .45;
   }
-}
-
-/* Spinner */
-.spinner {
-  display: inline-block;
-  width: 13px;
-  height: 13px;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  border-top-color: #fff;
-  border-radius: 50%;
-  animation: spinMe 0.75s linear infinite;
-}
-
-/* Status dot */
-.status-live {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #4A8055;
-  animation: statusPulse 2.5s ease infinite;
 }
