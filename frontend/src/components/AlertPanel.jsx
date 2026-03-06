@@ -186,7 +186,7 @@ export default function AlertPanel({ result, error }) {
             {/* Footer */}
             <div style={{ padding: "0.6rem 1.25rem", borderTop: "1px solid #F3F4F6", display: "flex", justifyContent: "space-between" }}>
                 <span style={{ fontSize: "0.67rem", color: "#D1D5DB" }}>{new Date().toLocaleTimeString()} — {new Date().toLocaleDateString()}</span>
-                <span style={{ fontSize: "0.67rem", color: "#D1D5DB" }}>ClinIQ v2 · 21 rules</span>
+                <span style={{ fontSize: "0.67rem", color: "#D1D5DB" }}>ClinIQ v2</span>
             </div>
         </motion.div>
     );

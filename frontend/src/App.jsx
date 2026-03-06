@@ -93,9 +93,7 @@ function App() {
         </div>
 
         {/* Status strip */}
-        <div style={{ marginTop: "1.25rem", padding: "0.65rem 1.25rem", background: "#fff", border: "1px solid #E5E7EB", borderRadius: 8, display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
 
-        </div>
       </main>
     </div>
   );
