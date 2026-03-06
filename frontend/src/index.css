@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────
+   THEME — Minimal Clinical Palette
+   ───────────────────────────────────────── */
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* Backgrounds */
+  --color-medical-black: #0B0B0B;
+  --color-charcoal: #161616;
+  --color-charcoal-2: #1C1C1C;
+  --color-charcoal-3: #222222;
+
+  /* Borders */
+  --color-border: #2A2A2A;
+  --color-border-subtle: #1F1F1F;
+
+  /* Text */
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #9A9A9A;
+  --color-text-muted: #5A5A5A;
+
+  /* Accent — Warm Brown / Sand */
+  --color-clinical-brown: #8B5E3C;
+  --color-soft-sand: #C8A27A;
+  --color-sand-light: #E8D5B7;
+
+  /* Semantic */
+  --color-critical: #C84444;
+  --color-critical-bg: #1A0A0A;
+  --color-warning-bg: #1A1208;
+  --color-safe: #4A7C59;
+  --color-safe-bg: #0A1510;
+  --color-low-bg: #0E0E12;
+
+  --animate-slide-in: slideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* ─────────────────────────────────────────
+   BASE
+   ───────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-medical-black);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  letter-spacing: -0.01em;
+}
+
+/* ─────────────────────────────────────────
+   COMPONENT UTILITIES
+   ───────────────────────────────────────── */
+@layer components {
+
+  /* Surface card */
+  .surface {
+    background: var(--color-charcoal);
+    border: 1px solid var(--color-border);
+  }
+
+  /* Clinical input */
+  .clinical-input {
+    width: 100%;
+    background: var(--color-medical-black);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text-primary);
+    font-family: inherit;
+    font-size: 0.875rem;
+    padding: 0.6rem 0.85rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .clinical-input::placeholder {
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+  }
+
+  .clinical-input:focus {
+    border-color: var(--color-clinical-brown);
+    box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.12);
+  }
+
+  /* Primary button */
+  .btn-clinical {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--color-clinical-brown);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.65rem 1.5rem;
+    font-family: inherit;
+    font-size: 0.87rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .btn-clinical:hover:not(:disabled) {
+    background: #7A5235;
+  }
+
+  .btn-clinical:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* Section label */
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--color-border-subtle);
+  }
+
+  /* Alert slide */
+  .alert-slide {
+    animation: var(--animate-slide-in);
+  }
+}
+
+/* ─────────────────────────────────────────
+   KEYFRAMES
+   ───────────────────────────────────────── */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spinMe {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes statusPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spinMe 0.75s linear infinite;
+}
+
+/* Status dot */
+.status-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4A8055;
+  animation: statusPulse 2.5s ease infinite;
+}
