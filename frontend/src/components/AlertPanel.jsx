@@ -124,7 +124,7 @@ export default function AlertPanel({ result, error }) {
                     to generate clinical alerts.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", alignItems: "flex-start", marginTop: "0.5rem" }}>
-                    {["21 clinical rules active", "Drug interaction checks", "Predictive risk scoring", "Expandable recommendations"].map((f) => (
+                    {["Drug interaction checks", "Predictive risk scoring", "Expandable recommendations"].map((f) => (
                         <div key={f} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.72rem", color: "#9CA3AF" }}>
                             <span style={{ color: "#8B5E3C", fontWeight: 700 }}>—</span> {f}
                         </div>

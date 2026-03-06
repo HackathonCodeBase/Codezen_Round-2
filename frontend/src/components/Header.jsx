@@ -48,17 +48,9 @@ export default function Header() {
                     transition={{ duration: 0.4, delay: 0.08 }}
                 >
                     <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
-                        <div className="dot-live" />
-                        <span style={{ fontSize: "0.72rem", color: "#065F46", fontWeight: 600 }}>System Online</span>
                     </div>
                     <div style={{ width: 1, height: 18, background: "#E5E7EB" }} />
-                    <span style={{
-                        fontSize: "0.72rem", color: "#6B7280", fontWeight: 500,
-                        padding: "0.25rem 0.7rem",
-                        border: "1px solid #E5E7EB", borderRadius: 4,
-                    }}>
-                        Doctor Dashboard
-                    </span>
+
                 </motion.div>
             </div>
         </header>

@@ -49,7 +49,7 @@ function App() {
               transition={{ duration: 0.4, delay: 0.1 }}
               style={{ fontSize: "0.77rem", color: "#9CA3AF" }}
             >
-              21 clinical rules · Predictive scoring · Expandable recommendations
+              Predictive scoring · Expandable recommendations
             </motion.p>
           </div>
 
@@ -58,7 +58,7 @@ function App() {
             transition={{ duration: 0.4, delay: 0.15 }}
             style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}
           >
-            {["Vital Signs", "Glucose & Metabolic", "Drug Interactions", "Allergy Conflicts", "Risk Scoring"].map((t) => (
+            {[].map((t) => (
               <span key={t} style={{ fontSize: "0.65rem", fontWeight: 500, padding: "0.2rem 0.6rem", border: "1px solid #E5E7EB", borderRadius: 4, color: "#6B7280", background: "#fff" }}>
                 {t}
               </span>
@@ -94,12 +94,7 @@ function App() {
 
         {/* Status strip */}
         <div style={{ marginTop: "1.25rem", padding: "0.65rem 1.25rem", background: "#fff", border: "1px solid #E5E7EB", borderRadius: 8, display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
-          {["21 clinical rules active", "Real-time FastAPI analysis", "Local — no data stored", "Expandable alert recommendations"].map((t) => (
-            <div key={t} style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
-              <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#E5E7EB" }} />
-              <span style={{ fontSize: "0.68rem", color: "#9CA3AF" }}>{t}</span>
-            </div>
-          ))}
+
         </div>
       </main>
     </div>
